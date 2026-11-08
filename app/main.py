@@ -12,12 +12,16 @@ from app.exceptions import AppError
 from app.logging_config import setup_logging
 from app.ingest import ingest_document
 from app.rag import ask as rag_ask
+from fastapi import Depends
+from app.auth_routes import router as auth_router
+from app.dependencies import get_current_tenant_id
 
 settings = get_settings()
 setup_logging(settings.log_level)
 log = structlog.get_logger()
 
 app = FastAPI(title=settings.app_name)
+app.include_router(auth_router)
 @app.exception_handler(AppError)
 async def app_error_handler(request: Request, exc: AppError):
     log.warning("app_error", code=exc.code, message=exc.message, path=request.url.path)
@@ -33,16 +37,15 @@ async def health():
 
 
 class AskRequest(BaseModel):
-    tenant_id: str
     query: str
 
 
 @app.post("/ask")
-async def ask_endpoint(payload: AskRequest):
-    answer = rag_ask(payload.tenant_id, payload.query)
+async def ask_endpoint(payload: AskRequest, tenant_id: str = Depends(get_current_tenant_id)):
+    answer = rag_ask(tenant_id, payload.query)
     return {"answer": answer}
 @app.post("/documents/upload")
-async def upload_endpoint(tenant_id: str = Form(...), file: UploadFile = File(...)):
+async def upload_endpoint(file: UploadFile = File(...), tenant_id: str = Depends(get_current_tenant_id)):
     os.makedirs("uploads", exist_ok=True)
     temp_path = os.path.join("uploads", f"{uuid.uuid4()}_{file.filename}")
     with open(temp_path, "wb") as f:
