@@ -10,3 +10,8 @@ class AppError(Exception):
 class NotFoundError(AppError):
     status_code = 404
     code = "not_found"
+
+
+class EmptyDocumentError(AppError):
+    status_code = 422
+    code = "empty_document"

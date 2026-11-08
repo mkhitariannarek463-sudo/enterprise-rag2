@@ -63,7 +63,7 @@ if uploaded is not None and st.button("Upload document"):
     if response.status_code == 200:
         st.success("Document indexed")
     else:
-        st.error(f"Upload failed ({response.status_code})")
+        st.error(f"Upload failed ({response.status_code}): {response.text}")
 
 st.subheader("2. Ask a question")
 question = st.text_input("Your question")
