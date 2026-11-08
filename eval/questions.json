@@ -18,5 +18,10 @@
   {"question": "What is C4 carbon fixation?", "must_contain": "C4"},
   {"question": "What do purple bacteria use instead of water in photosynthesis?", "must_contain": "hydrogen sulfide"},
   {"question": "What is photorespiration?", "must_contain": "photorespiration"},
-  {"question": "What are the products of the light-dependent reactions?", "must_contain": "ATP"}
+  {"question": "What are the products of the light-dependent reactions?", "must_contain": "ATP"},
+  {"question": "Which city is the seat of government of the Armenian republic?", "must_contain": "Yerevan"},
+  {"question": "Which neighbouring state lies on the northern frontier of Armenia?", "must_contain": "Georgia"},
+  {"question": "Which scholar invented the script used to write the Armenian language?", "must_contain": "Mashtots"},
+  {"question": "In which year did the country leave the USSR and become sovereign?", "must_contain": "1991"},
+  {"question": "Which green compound captures sunlight inside leaves?", "must_contain": "chlorophyll"}
 ]
