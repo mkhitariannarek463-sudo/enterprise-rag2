@@ -42,8 +42,8 @@ class AskRequest(BaseModel):
 
 @app.post("/ask")
 async def ask_endpoint(payload: AskRequest, tenant_id: str = Depends(get_current_tenant_id)):
-    answer = rag_ask(tenant_id, payload.query)
-    return {"answer": answer}
+    result = rag_ask(tenant_id, payload.query)
+    return result  
 @app.post("/documents/upload")
 async def upload_endpoint(file: UploadFile = File(...), tenant_id: str = Depends(get_current_tenant_id)):
     os.makedirs("uploads", exist_ok=True)

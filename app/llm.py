@@ -1,24 +1,33 @@
+from abc import ABC, abstractmethod
+
 from anthropic import Anthropic
+
 from app.config import get_settings
 
 settings = get_settings()
-client = Anthropic(api_key=settings.anthropic_api_key)
 
 
-def generate_answer(query: str, context_chunks: list) -> str:
-    context_text = "\n\n".join(context_chunks)
-    prompt = f"""You are a helpful assistant. Answer the question using ONLY the context below. If the answer is not in the context, say you don't know.
+class LLMProvider(ABC):
+    @abstractmethod
+    def generate(self, system: str, user: str) -> str:
+        """Send a system prompt and a user prompt, return the model’s text reply."""
 
-Context:
-{context_text}
 
-Question: {query}
+class AnthropicProvider(LLMProvider):
+    def __init__(self) -> None:
+        self.client = Anthropic(api_key=settings.anthropic_api_key)
 
-Answer:"""
+    def generate(self, system: str, user: str) -> str:
+        message = self.client.messages.create(
+            model=settings.llm_model,
+            max_tokens=1000,
+            system=system,
+            messages=[{"role": "user", "content": user}],
+        )
+        return "".join(
+            block.text for block in message.content if block.type == "text"
+        )
 
-    message = client.messages.create(
-        model=settings.llm_model,
-        max_tokens=500,
-        messages=[{"role": "user", "content": prompt}],
-    )
-    return "".join(block.text for block in message.content if block.type == 'text')
+
+def get_llm_provider() -> LLMProvider:
+    return AnthropicProvider()

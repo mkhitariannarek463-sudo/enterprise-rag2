@@ -76,7 +76,13 @@ if st.button("Ask") and question:
             timeout=120,
         )
     if response.status_code == 200:
-        st.write(response.json()["answer"])
+            data = response.json()
+            st.write(data["answer"])
+            for source in data.get("sources", []):
+                with st.expander(f"Source {source['id']}"):
+                    st.write(source["text"])
+
+        
     elif response.status_code == 401:
         st.session_state.token = None
         st.error("Session expired. Please log in again.")
