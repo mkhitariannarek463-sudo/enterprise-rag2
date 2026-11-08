@@ -71,6 +71,16 @@ python -c “from app.database import Base, engine; import app.models; Base.meta
 uvicorn app.main:app --reload
 ```
 
+## Web UI
+
+A simple Streamlit interface lets a user log in, upload a PDF and ask questions without using Swagger.
+
+```bash
+streamlit run ui/app.py
+```
+Open http://localhost:8501. The API must be running on http://127.0.0.1:8000.
+
+
 ## Running the evaluation
 
 Upload your test PDFs through `/documents/upload`, put your questions in `eval/questions.json`, then run:
