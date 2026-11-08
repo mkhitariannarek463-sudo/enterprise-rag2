@@ -36,4 +36,6 @@ def ask(tenant_id: str, query: str, top_k: int = 5) -> dict:
         for n in parsed["sources"]
         if 1 <= n <= len(chunks)
     ]
+    if not sources: 
+         return {"answer": NO_INFO_ANSWER, "sources": []}
     return {"answer": parsed["answer"], "sources": sources}
