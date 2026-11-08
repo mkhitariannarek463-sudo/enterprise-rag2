@@ -4,7 +4,7 @@ from qdrant_client.models import Filter, FieldCondition, MatchValue
 from app.database import SessionLocal
 from app.embeddings import generate_embedding
 from app.vector_store import qdrant_client, COLLECTION_NAME
-
+MIN_VECTOR_SCORE = 0.35
 
 def keyword_search(tenant_id: str, query: str, top_k: int = 10):
     db = SessionLocal()
@@ -31,6 +31,7 @@ query_filter=Filter(
 ),
 limit=top_k,
 )
+    results = [point for point in results if point.score >= MIN_VECTOR_SCORE]
     return [(str(point.id), point.payload.get("content", "")) for point in results]
 def reciprocal_rank_fusion(keyword_results, vector_results, k=60):
     scores = {}
