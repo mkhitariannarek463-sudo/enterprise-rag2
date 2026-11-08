@@ -21,4 +21,4 @@ Answer:"""
         max_tokens=500,
         messages=[{"role": "user", "content": prompt}],
     )
-    return message.content[0].text
+    return "".join(block.text for block in message.content if block.type == 'text')
