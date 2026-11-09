@@ -5,6 +5,7 @@ from sqlalchemy import text
 
 from app.database import SessionLocal
 from app.retrieval import hybrid_search, keyword_search, vector_search
+from app.reranker import rerank
 from eval.evaluate import get_tenant_id
 
 K_VALUES = [1, 3, 5]
@@ -44,6 +45,11 @@ def evaluate(name, search_fn, tenant_id, questions, db):
     for k in K_VALUES:
         print("  K=%d | Recall %.2f | Precision %.2f | Hit %.2f" % (k, recall[k] / counted, precision[k] / counted, hit[k] / counted))
     print("  MRR %.3f" % (mrr / counted))
+
+def hybrid_rerank(tenant_id, query, top_k=5):
+    candidates = hybrid_search(tenant_id, query, 10)
+    return rerank(query, candidates, top_k)
+
 def main():
     questions = json.loads(Path("eval/questions.json").read_text(encoding="utf-8"))
     tenant_id = get_tenant_id()
@@ -51,6 +57,7 @@ def main():
     evaluate("KEYWORD", keyword_search, tenant_id, questions, db)
     evaluate("VECTOR", vector_search, tenant_id, questions, db)
     evaluate("HYBRID", hybrid_search, tenant_id, questions, db)
+    evaluate("HYBRID+RERANK", hybrid_rerank, tenant_id, questions, db)
     db.close()
 
 
