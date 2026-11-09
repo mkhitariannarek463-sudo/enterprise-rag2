@@ -114,11 +114,12 @@ End-to-end test on the same 25 questions (hybrid retrieval, reranking over the t
 - Answer contains the gold value: 25/25
 - Cited source contains the gold value: 25/25
 - Out-of-scope questions still rejected: 15/15 (10 off-topic plus 5 trap questions)
+
 Before reranking the result was 24/25. For one paraphrased question the answer chunk ranked 9th, so the system refused instead of guessing. That is the safe failure mode, and it is what led to enabling reranking.
 
 
 ### Guardrails
-- Out-of-scope questions: 15 questions whose answers are not in the documents (10 off-topic, 5 trap questions on the same topics as the documents but asking for details that are missing) were all rejected with the no-information reply (15/15). Only 8 of 15 were stopped at retrieval (relevance threshold); the other 7, including all 5 trap questions, reached the model and were rejected by the generation and citation checks.- Out-of-scope questions: 10 questions whose answers are not in the documents were all rejected with “No relevant information found” (10/10). 8 of 10 were stopped at retrieval (relevance threshold), the other 2 by the generation/citation checks.
+- Out-of-scope questions: 15 questions whose answers are not in the documents (10 off-topic, 5 trap questions on the same topics as the documents but asking for details that are missing) were all rejected with the no-information reply (15/15). Only 8 of 15 were stopped at retrieval (relevance threshold); the other 7, including all 5 trap questions, reached the model and were rejected by the generation and citation checks.
 - Prompt injection: a document containing “ignore all previous instructions” did not change the model’s behavior.
 - Every answer returns the source chunks it was based on; answers without a valid cited source are replaced by the “no information” reply.
 
