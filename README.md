@@ -104,7 +104,19 @@ Retrieval quality is measured on a hand-written golden set of 25 questions over 
 
 Notes:
 - Recall@5 is low by design: some answer strings appear in many chunks (up to 30), so 5 results can never cover them all. Hit rate and Precision are the more meaningful numbers here.
-- Reranking changed the result by about one question out of 25, which is within noise, so it is NOT enabled in the main pipeline. It will be re-tested on a larger corpus.
+- Reranking looked like noise on the gold metrics, but end-to-end it fixed a real miss: for one question the answer chunk was at rank 9 of the hybrid results, and the reranker moved it to rank 2. A substring false positive (a bibliography chunk containing the same name) had hidden this miss in the hybrid Hit@5, so the true hybrid Hit@5 is about 0.96 (24/25), not 1.00. Reranking over the top-10 hybrid candidates is therefore enabled in the main pipeline.
+
+### Answer and citation accuracy
+
+End-to-end test on the same 25 questions (hybrid retrieval, reranking over the top-10 candidates, Claude answer with cited sources):
+
+- Answered: 25/25
+- Answer contains the gold value: 25/25
+- Cited source contains the gold value: 25/25
+- Out-of-scope questions still rejected: 10/10
+
+Before reranking the result was 24/25. For one paraphrased question the answer chunk ranked 9th, so the system refused instead of guessing. That is the safe failure mode, and it is what led to enabling reranking.
+
 
 ### Guardrails
 - Out-of-scope questions: 10 questions whose answers are not in the documents were all rejected with “No relevant information found” (10/10). 8 of 10 were stopped at retrieval (relevance threshold), the other 2 by the generation/citation checks.
@@ -113,8 +125,9 @@ Notes:
 
 ### Limitations
 
-- Small corpus (2 documents) and small question sets (25 positive, 10 negative): results are encouraging, not a final proof. Planned: larger corpus, harder questions, citation-accuracy metric.
-- Gold labels are based on string matching, not human-annotated chunks.
+- Small corpus (2 documents) and small question sets (25 positive, 10 negative): results are encouraging, not a final proof. Planned: a larger corpus and harder questions, including trap questions on the same topic whose details are missing from the documents.
+- Gold labels are based on string matching, not human-annotated chunks. This already produced one false positive (a bibliography chunk matching a name), which is documented above.
+
 
 ### Security & tenant isolation
 
