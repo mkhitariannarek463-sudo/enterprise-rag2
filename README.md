@@ -90,3 +90,28 @@ python -m eval.evaluate
 ```
 
 It prints hit rate and MRR for keyword-only, vector-only and hybrid retrieval, plus the questions each method missed.
+
+## Evaluation
+
+Retrieval quality is measured on a hand-written golden set of 25 questions over 2 documents (~83 chunks, single tenant). A chunk counts as relevant if it belongs to the gold document and contains the gold answer string. K = 1 / 3 / 5.
+
+| Method | Precision@1 | Hit@5 | Recall@5 | MRR |
+|--|—|--|--|—|
+| Keyword (Postgres full-text) | 0.68 | 0.72 | 0.29 | 0.700 |
+| Vector (Qdrant) | 0.52 | 0.92 | 0.28 | 0.691 |
+| **Hybrid (RRF)** | **0.92** | **1.00** | 0.38 | 0.948 |
+| Hybrid + cross-encoder rerank | 0.92 | 1.00 | 0.38 | 0.953 |
+
+Notes:
+- Recall@5 is low by design: some answer strings appear in many chunks (up to 30), so 5 results can never cover them all. Hit rate and Precision are the more meaningful numbers here.
+- Reranking changed the result by about one question out of 25, which is within noise, so it is NOT enabled in the main pipeline. It will be re-tested on a larger corpus.
+
+### Guardrails
+- Out-of-scope questions: 10 questions whose answers are not in the documents were all rejected with “No relevant information found” (10/10). 8 of 10 were stopped at retrieval (relevance threshold), the other 2 by the generation/citation checks.
+- Prompt injection: a document containing “ignore all previous instructions” did not change the model’s behavior.
+- Every answer returns the source chunks it was based on; answers without a valid cited source are replaced by the “no information” reply.
+
+### Limitations
+
+- Small corpus (2 documents) and small question sets (25 positive, 10 negative): results are encouraging, not a final proof. Planned: larger corpus, harder questions, citation-accuracy metric.
+- Gold labels are based on string matching, not human-annotated chunks.
