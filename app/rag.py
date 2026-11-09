@@ -3,6 +3,7 @@ import json
 from app.llm import get_llm_provider
 from app.prompts import SYSTEM_PROMPT, build_user_prompt
 from app.retrieval import hybrid_search
+from app.reranker import rerank
 
 NO_INFO_ANSWER = "No relevant information found in the documents."
 
@@ -23,7 +24,8 @@ def parse_llm_reply(reply: str) -> dict:
 
 
 def ask(tenant_id: str, query: str, top_k: int = 5) -> dict:
-    results = hybrid_search(tenant_id, query, top_k=top_k)
+    candidates = hybrid_search(tenant_id, query, top_k=10)
+    results = rerank(query, candidates, top_k) if candidates else []
     chunks = [content for _, content, _ in results]
     if not chunks:
         return {"answer": NO_INFO_ANSWER, "sources": []}
