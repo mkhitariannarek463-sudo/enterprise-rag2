@@ -115,3 +115,11 @@ Notes:
 
 - Small corpus (2 documents) and small question sets (25 positive, 10 negative): results are encouraging, not a final proof. Planned: larger corpus, harder questions, citation-accuracy metric.
 - Gold labels are based on string matching, not human-annotated chunks.
+
+### Security & tenant isolation
+
+- Every query is filtered by `tenant_id` taken from the signed access token, never from user input.
+- Isolation is tested at two levels:
+  - retrieval layer: 3 tenants x 5 queries x 3 search methods (keyword, vector, hybrid) = 45 checks, 0 cross-tenant leaks (`python -m eval.test_isolation`);
+  - API layer: user A uploads a document with a unique secret, user B (another company) asks about it and does not see it; requests without a token or with an invalid token get 401 (`python -m eval.test_api_isolation`).
+- Passwords are hashed; login and register enforce length limits.
