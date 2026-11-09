@@ -1,27 +1,127 @@
 [
-  {"question": "What is the capital of Armenia?", "must_contain": "Yerevan"},
-  {"question": "Which country borders Armenia to the north?", "must_contain": "Georgia"},
-  {"question": "Who created the Armenian alphabet?", "must_contain": "Mashtots"},
-  {"question": "When did Armenia declare independence from the Soviet Union?", "must_contain": "1991"},
-  {"question": "What is the currency of Armenia?", "must_contain": "dram"},
-  {"question": "What is the highest mountain located in Armenia?", "must_contain": "Aragats"},
-  {"question": "What is the largest lake in Armenia?", "must_contain": "Sevan"},
-  {"question": "In what year did Armenia adopt Christianity as its state religion?", "must_contain": "301"},
-  {"question": "When did the Armenian Genocide take place?", "must_contain": "1915"},
-  {"question": "Which famous mountain is visible from Yerevan but located in Turkey?", "must_contain": "Ararat"},
-  {"question": "Which pigment absorbs light in photosynthesis?", "must_contain": "chlorophyll"},
-  {"question": "In which organelles does photosynthesis take place in plants?", "must_contain": "chloroplast"},
-  {"question": "What is the Calvin cycle?", "must_contain": "Calvin"},
-  {"question": "Which enzyme fixes carbon dioxide in the Calvin cycle?", "must_contain": "Rubisco"},
-  {"question": "Where do the light-dependent reactions take place?", "must_contain": "thylakoid"},
-  {"question": "Who discovered that plants restore oxygen to the air?", "must_contain": "Priestley"},
-  {"question": "What is C4 carbon fixation?", "must_contain": "C4"},
-  {"question": "What do purple bacteria use instead of water in photosynthesis?", "must_contain": "hydrogen sulfide"},
-  {"question": "What is photorespiration?", "must_contain": "photorespiration"},
-  {"question": "What are the products of the light-dependent reactions?", "must_contain": "ATP"},
-  {"question": "Which city is the seat of government of the Armenian republic?", "must_contain": "Yerevan"},
-  {"question": "Which neighbouring state lies on the northern frontier of Armenia?", "must_contain": "Georgia"},
-  {"question": "Which scholar invented the script used to write the Armenian language?", "must_contain": "Mashtots"},
-  {"question": "In which year did the country leave the USSR and become sovereign?", "must_contain": "1991"},
-  {"question": "Which green compound captures sunlight inside leaves?", "must_contain": "chlorophyll"}
+ {
+  "question": "What is the capital of Armenia?",
+  "must_contain": "Yerevan",
+  "doc": "Armenia.pdf"
+ },
+ {
+  "question": "Which country borders Armenia to the north?",
+  "must_contain": "Georgia",
+  "doc": "Armenia.pdf"
+ },
+ {
+  "question": "Who created the Armenian alphabet?",
+  "must_contain": "Mashtots",
+  "doc": "Armenia.pdf"
+ },
+ {
+  "question": "When did Armenia declare independence from the Soviet Union?",
+  "must_contain": "1991",
+  "doc": "Armenia.pdf"
+ },
+ {
+  "question": "What is the currency of Armenia?",
+  "must_contain": "dram",
+  "doc": "Armenia.pdf"
+ },
+ {
+  "question": "What is the highest mountain located in Armenia?",
+  "must_contain": "Aragats",
+  "doc": "Armenia.pdf"
+ },
+ {
+  "question": "What is the largest lake in Armenia?",
+  "must_contain": "Sevan",
+  "doc": "Armenia.pdf"
+ },
+ {
+  "question": "In what year did Armenia adopt Christianity as its state religion?",
+  "must_contain": "301",
+  "doc": "Armenia.pdf"
+ },
+ {
+  "question": "When did the Armenian Genocide take place?",
+  "must_contain": "1915",
+  "doc": "Armenia.pdf"
+ },
+ {
+  "question": "Which famous mountain is visible from Yerevan but located in Turkey?",
+  "must_contain": "Ararat",
+  "doc": "Armenia.pdf"
+ },
+ {
+  "question": "Which pigment absorbs light in photosynthesis?",
+  "must_contain": "chlorophyll",
+  "doc": "Photosynthesis.pdf"
+ },
+ {
+  "question": "In which organelles does photosynthesis take place in plants?",
+  "must_contain": "chloroplast",
+  "doc": "Photosynthesis.pdf"
+ },
+ {
+  "question": "What is the Calvin cycle?",
+  "must_contain": "Calvin",
+  "doc": "Photosynthesis.pdf"
+ },
+ {
+  "question": "Which enzyme fixes carbon dioxide in the Calvin cycle?",
+  "must_contain": "Rubisco",
+  "doc": "Photosynthesis.pdf"
+ },
+ {
+  "question": "Where do the light-dependent reactions take place?",
+  "must_contain": "thylakoid",
+  "doc": "Photosynthesis.pdf"
+ },
+ {
+  "question": "Who discovered that plants restore oxygen to the air?",
+  "must_contain": "Priestley",
+  "doc": "Photosynthesis.pdf"
+ },
+ {
+  "question": "What is C4 carbon fixation?",
+  "must_contain": "C4",
+  "doc": "Photosynthesis.pdf"
+ },
+ {
+  "question": "What do purple bacteria use instead of water in photosynthesis?",
+  "must_contain": "hydrogen sulfide",
+  "doc": "Photosynthesis.pdf"
+ },
+ {
+  "question": "What is photorespiration?",
+  "must_contain": "photorespiration",
+  "doc": "Photosynthesis.pdf"
+ },
+ {
+  "question": "What are the products of the light-dependent reactions?",
+  "must_contain": "ATP",
+  "doc": "Photosynthesis.pdf"
+ },
+ {
+  "question": "Which city is the seat of government of the Armenian republic?",
+  "must_contain": "Yerevan",
+  "doc": "Armenia.pdf"
+ },
+ {
+  "question": "Which neighbouring state lies on the northern frontier of Armenia?",
+  "must_contain": "Georgia",
+  "doc": "Armenia.pdf"
+ },
+ {
+  "question": "Which scholar invented the script used to write the Armenian language?",
+  "must_contain": "Mashtots",
+  "doc": "Armenia.pdf"
+ },
+ {
+  "question": "In which year did the country leave the USSR and become sovereign?",
+  "must_contain": "1991",
+  "doc": "Armenia.pdf"
+ },
+ {
+  "question": "Which green compound captures sunlight inside leaves?",
+  "must_contain": "chlorophyll",
+  "doc": "Photosynthesis.pdf"
+ }
 ]
