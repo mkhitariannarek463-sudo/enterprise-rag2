@@ -110,9 +110,9 @@ Notes:
 
 End-to-end test on the same 25 questions (hybrid retrieval, reranking over the top-10 candidates, Claude answer with cited sources):
 
-- Answered: 25/25
-- Answer contains the gold value: 25/25
-- Cited source contains the gold value: 25/25
+- Answered: 24-25/25
+- Answer contains the gold value: 24-25/25
+- Cited source contains the gold value: 24-25/25
 - Out-of-scope questions still rejected: 15/15 (10 off-topic plus 5 trap questions)
 
 Before reranking the result was 24/25. For one paraphrased question the answer chunk ranked 9th, so the system refused instead of guessing. That is the safe failure mode, and it is what led to enabling reranking.
